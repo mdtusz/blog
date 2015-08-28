@@ -1,0 +1,38 @@
+// Article elements
+.archive{
+  margin-top: 15px;
+  a{
+    color: #0a8;
+  }
+  h1{
+    font-size: 20px;
+    font-family: 'lato';
+    margin: 0 20px 0 0;
+    display: inline-block;
+    @media only screen and (max-width: 570px){
+      display: block;
+    }
+    &:hover, &:active{
+      @include transition(color 0.2s ease);
+      color: darken(#0a8, 5%);
+    }
+  }
+
+  h1:hover + span{
+    color: #ddd;
+  }
+
+  time{
+    float: right;
+    font-size: 12px;
+    margin-bottom: 4px;
+    font-family: 'merriweather';
+  }
+
+  span{
+    font-family: 'merriweather';
+    font-size: 10px;
+    color: #fff;
+    @include transition(color 0.2s ease);
+  }
+}

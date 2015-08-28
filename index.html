@@ -1,0 +1,36 @@
+---
+layout: default
+title: oh hey there
+---
+
+<!-- <div id="home-image">  
+</div> -->
+
+{% for post in paginator.posts %}
+<article>
+  <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_string }}</time>
+  <h1><a href="{{ post.url | prepent: site.baseurl }}">{{ post.title }}</a></h1>
+  <p>
+    {{ post.excerpt }}
+  </p>
+  <a class="readmore" href="{{ post.url | prepend: site.baseurl }}">read more...</a>
+  <span class="read-time">
+    {% assign wordcount = post.content | number_of_words %}
+    {% if wordcount < 320 %}
+      about 1 minute of reading
+    {% else %}
+      about {{ wordcount | divided_by:160 }} minutes of reading
+    {% endif %}
+  </span>
+</article>
+{% endfor %}
+
+
+<div class="pagination">
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl }}" class="older">older</a>
+  {% endif %}
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}" class="newer">newer</a>
+  {% endif %}
+</div>

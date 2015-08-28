@@ -1,0 +1,23 @@
+---
+layout: default
+title: archive
+---
+
+
+{% for post in site.posts %}
+<div class="archive">
+  <time>{{ post.date | date_to_string }}</time>
+  <h1><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h1>
+  <span>
+    {% assign wordcount = post.content | number_of_words %}
+    {% if wordcount < 320 %}
+      about 1 minute of reading
+    {% else %}
+      about {{ wordcount | divided_by:160 }} minutes of reading
+    {% endif %}
+  </span>
+</div>
+{% endfor %}
+
+<!-- <span><em>We are the only species on the planet, so far as we know, to have invented a communal memory stored neither in our genes nor in our brains.</em>
+― Carl Sagan</span> -->

@@ -1,0 +1,69 @@
+// Code
+code, pre, .gist, .gist-file {
+  font-family: Menlo, Monaco, "Courier New", monospace !important;
+  font-size: 12px;
+}
+
+code {
+  padding: .25em .5em;
+  // font-size: 90%;
+  color: #d44950;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+pre {
+  margin-top: 0;
+  margin-bottom: 1em;
+  font-size: 90%;
+}
+
+pre code {
+  padding: 0;
+  color: inherit;
+  background-color: transparent;
+}
+
+// Pygments via Jekyll
+.highlight {
+  padding: 1em;
+  margin-bottom: 1em;
+  // font-size: 90%;
+  line-height: 1.4;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+
+  pre {
+    margin-bottom: 0;
+    overflow-x: auto;
+  }
+
+  .lineno {
+    display: inline-block; // Ensures the null space also isn't selectable
+    padding-right: 6px;
+    padding-left: 6px;
+    color: #ddd;
+    // Make sure numbers aren't selectable
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+  }
+}
+
+
+// Gist via GitHub Pages
+.gist .markdown-body {
+  padding: 15px;
+}
+.gist pre {
+  padding: 0;
+  background-color: transparent;
+}
+.gist .gist-file .gist-data {
+  line-height: 1.4;
+}
+.gist code {
+  padding: 0;
+  color: inherit;
+  background-color: transparent;
+}
