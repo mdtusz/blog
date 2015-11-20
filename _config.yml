@@ -6,6 +6,9 @@ url: http://www.miklostusz.com
 paginate: 5
 baseurl: ""
 
+collections:
+  - images
+
 # Permalinks
 permalink: pretty
 relative_permalinks: true
