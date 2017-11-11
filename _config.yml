@@ -9,12 +9,8 @@ baseurl: ""
 collections:
   - images
 
-# Permalinks
-permalink: pretty
-relative_permalinks: true
-
 markdown: kramdown
-excerpt_separator: <!-- fold --> 
+excerpt_separator: <!-- fold -->
 
 # Assets
 sass:
@@ -33,4 +29,6 @@ author:
 # Custom vars
 version: 1.0.0
 github:
-  repo: 
+  repo:
+
+gems: [jekyll-paginate]
