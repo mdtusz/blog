@@ -1,0 +1,376 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>
+    
+      "Haskell": 17 Points in Scrabble™ &middot; miklós tusz
+    
+  </title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="alternate" type="application/atom+xml" title="miklós tusz" href="/atom.xml">
+    <link rel="shortcut icon" href="/public/favicons/favicon.ico">
+  <link rel="icon" sizes="16x16 32x32 64x64" href="/public/favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="196x196" href="/public/favicons/favicon-192.png">
+  <link rel="icon" type="image/png" sizes="160x160" href="/public/favicons/favicon-160.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicons/favicon-96.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/public/favicons/favicon-64.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicons/favicon-16.png">
+  <link rel="apple-touch-icon" href="/public/favicons/favicon-57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicons/favicon-114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicons/favicon-72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicons/favicon-144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicons/favicon-60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicons/favicon-120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicons/favicon-76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicons/favicon-152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicons/favicon-180.png">
+</head>
+  <body>
+    <nav id="sidebar">
+  <img src="/public/favicons/favicon-310.png" style="width: 50%; display: block; margin-bottom: 10px;" alt="Fibonacci Spiral">
+  <span class="title"><a href="/">miklós tusz</a></span>
+  <ul class="links">
+    <li><a href="/">home</a></li>
+    <li><a href="/about">about</a></li>
+    <li><a href="/projects">projects</a></li>
+    <!-- <li><a href="/photos">photos</a></li> -->
+    <li><a href="/archive">archive</a></li>
+    <li><a href="/public/cv.pdf">cv</a></li>
+  </ul>
+  <ul class="networks">
+    <li><a href="https://github.com/mdtusz" class="fa fa-github"></a></li>
+    <!-- <li><a href="http://stackexchange.com/users/4119555/mikl%C3%B3s-tusz" class="fa fa-stack-exchange"></a></li> -->
+    <li><a href="https://twitter.com/mdtusz" class="fa fa-twitter"></a></li>
+    <li><a href="https://instagram.com/mdtusz" class="fa fa-instagram"></a></li>
+  </ul>
+</nav>
+    <main>
+      <article>
+  <time datetime="2015-11-20T00:00:00-05:00">20 Nov 2015</time>
+  <h1>"Haskell": 17 Points in Scrabble™</h1>
+  <p><em>This has been in my <code class="highlighter-rouge">_drafts</code> directory for months and now that I re-read it, it seems trivial, but it’s time to start good habits and just post things instead of feeling like it’s inadequate.</em></p>
+
+<p>I’ve been in the process of learning Haskell for a while now, but only recently have gotten to a point where I feel like I know enough to actually <em>do</em> anything with it. While laying in bed, I was thinking of things I could write that would be easy, but not too easy and decided a simple little program to find all the possible word combinations given a set of Scrabble™ tiles would be a good start, and also a good way to demonstrate how concise Haskell code can be.</p>
+
+<!-- fold -->
+
+<h2 id="the-problem">The Problem</h2>
+
+<p>The problem at hand is a good one for learning, particularly because it involves a problem that nearly everyone has faced while playing Scrabble™ and can easily be reasoned about in your head.</p>
+
+<blockquote>
+  <p>Given a set of tiles, find all combinations of valid Scrabble™ words that can be played</p>
+</blockquote>
+
+<p>We’ll ignore the possibility of appending tiles to existing words for now and just focus on finding possibilities from a dictionary. I used this Scrabble™ dictionary CSV from <a href="https://github.com/zeisler/scrabble/blob/master/db/dictionary.csv.gz">here</a>. My first thought for how to get the job done was to make a list of possible letter combinations from the set we have, then, find the words that are common to both our list, and the dictionary. Pretty simple in our heads, but a bit of a messy process in languages like Javascript:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></td><td class="code"><pre><span class="kd">function</span> <span class="nx">permute</span><span class="p">(</span><span class="nx">x</span><span class="p">){</span>
+  
+  <span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">stack</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="kd">var</span> <span class="nx">permutations</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="kd">function</span> <span class="nx">doPermutation</span><span class="p">(){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">x</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">){</span>
+      <span class="nx">permutations</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">stack</span><span class="p">.</span><span class="nx">slice</span><span class="p">().</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+      <span class="kd">var</span> <span class="nx">tmp</span> <span class="o">=</span> <span class="nx">x</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+      <span class="nx">stack</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">tmp</span><span class="p">);</span>
+      <span class="nx">doPermutation</span><span class="p">();</span>
+      <span class="nx">stack</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+      <span class="nx">x</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">tmp</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">doPermutation</span><span class="p">();</span>
+  <span class="k">return</span> <span class="nx">permutations</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">letters</span> <span class="o">=</span> <span class="s2">"caietsh"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">permute</span><span class="p">(</span><span class="nx">letters</span><span class="p">));</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>This code isn’t the most easily readable, and if you copy it into a file to run with node, you’ll be waiting for quite some time before it finishes. What’s more, is that this isn’t even <em>all</em> the word combinations that are possible - it leaves out all the combinations that don’t use all of the available letters. While it’s very possible that there’s a better algorithm for finding permutations of a string, it’s likely to be more complex and far less easy to read.</p>
+
+<p>Even after getting this list of possible words, finding the intersection of the list with the Scrabble™ dictionary will be a very expensive process - given 8 letters, there are <em>13700 possibilities</em>.</p>
+
+<h2 id="enter-haskell">Enter Haskell</h2>
+
+<p>Lists are the bread and butter of Haskell. You use them <em>everywhere</em>. As such, the standard library includes lots of functions for working with them, and tasks like what we are dealing with become almost trivial.</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="n">possibilities</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span>
+<span class="n">possibilities</span> <span class="o">=</span> <span class="n">concat</span> <span class="o">.</span> <span class="n">map</span> <span class="n">permutations</span> <span class="o">.</span> <span class="n">subsequences</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>This is the entire function for generating a list of possible combinations, given a string. It is written in what is known as <a href="https://wiki.haskell.org/Pointfree">point-free notation</a> and with function composition, so if you aren’t familiar with Haskell, this version may make more sense:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="n">possibilities</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span>
+<span class="n">possibilities</span> <span class="n">letters</span> <span class="o">=</span> <span class="n">concat</span> <span class="p">(</span><span class="n">map</span> <span class="n">permutations</span> <span class="p">(</span><span class="n">subsequences</span> <span class="n">letters</span><span class="p">))</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>First, we get a list of <code class="highlighter-rouge">subsequences</code> of our letter set because we don’t necessarily have to use all the letters. Then, we <code class="highlighter-rouge">map</code> the function <code class="highlighter-rouge">permutations</code> to the list of subsequences we found, and finally, <code class="highlighter-rouge">concat</code>enate the resulting list of lists together so we end up with a list of strings. This list is pretty big for letter sets of size 7 or 8, so it can take a while to be computed. It takes even more time to find the intersection of our dictionary unless we sort our dictionary and create a binary search tree (something that I may need to do in the future just for fun). However, at this point, I thought of a much simpler way to find the possible words and started from the beginning.</p>
+
+<h2 id="take-two">Take Two</h2>
+
+<p>Instead of computing a list of <em>all</em> possible letter combinations, why not just go through the dictionary to see what is possible, <em>and a real word</em> . It’s a fairly obvious thing to do looking back, but when I first was thinking about this, it just never occured to me. So what is required to make it happen?</p>
+
+<ol>
+  <li>Iterate through the dictionary</li>
+  <li>Check if each dictionary word can be made using our letters</li>
+  <li>Throw away the words we can’t make</li>
+</ol>
+
+<p>Simple right? Now before you look below here at the Haskell code, just imagine what this would look like written in Javascript, or Python, or Ruby. More than 30 lines, right? Here’s the complete Haskell code, inluding reading and parsing the Scrabble™ dictionary csv, and adding the possible scores for the returned words:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre></td><td class="code"><pre><span class="kr">import</span> <span class="nn">Data.List</span>
+<span class="kr">import</span> <span class="nn">Data.Maybe</span>
+<span class="kr">import</span> <span class="k">qualified</span> <span class="nn">Data.Map</span> <span class="k">as</span> <span class="n">M</span>
+
+<span class="n">possibilities</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span>
+<span class="n">possibilities</span> <span class="n">letters</span> <span class="o">=</span> <span class="n">filter</span> <span class="p">(</span><span class="n">possibleWord</span> <span class="n">letters</span><span class="p">)</span>
+
+<span class="n">possibleWord</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="n">possibleWord</span> <span class="n">xs</span> <span class="kt">[]</span> <span class="o">=</span> <span class="kt">True</span>
+<span class="n">possibleWord</span> <span class="n">xs</span> <span class="p">(</span><span class="n">y</span><span class="o">:</span><span class="n">ys</span><span class="p">)</span> <span class="o">=</span> <span class="kr">if</span> <span class="n">y</span> <span class="p">`</span><span class="n">elem</span><span class="p">`</span> <span class="n">xs</span>
+  <span class="kr">then</span> <span class="n">possibleWord</span> <span class="p">(</span><span class="n">delete</span> <span class="n">y</span> <span class="n">xs</span><span class="p">)</span> <span class="n">ys</span>
+  <span class="kr">else</span> <span class="kt">False</span>
+
+<span class="n">scores</span> <span class="o">::</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">score</span> <span class="n">x</span><span class="p">))</span>
+
+<span class="n">score</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">foldr</span> <span class="p">(</span><span class="nf">\</span><span class="n">tile</span> <span class="n">acc</span> <span class="o">-&gt;</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">tileScore</span> <span class="n">tile</span><span class="p">)</span> <span class="mi">0</span>
+  <span class="kr">where</span> <span class="n">tileScore</span> <span class="n">t</span> <span class="o">=</span> <span class="n">fromJust</span> <span class="o">$</span> <span class="kt">M</span><span class="o">.</span><span class="n">lookup</span> <span class="n">t</span> <span class="n">tiles</span>
+
+
+<span class="n">tiles</span> <span class="o">=</span> <span class="kt">M</span><span class="o">.</span><span class="n">fromList</span> <span class="p">[(</span><span class="sc">'a'</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">'b'</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="sc">'c'</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="sc">'d'</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+                        <span class="p">,(</span><span class="sc">'e'</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">'f'</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="sc">'g'</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="sc">'h'</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+                        <span class="p">,(</span><span class="sc">'i'</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">'j'</span><span class="p">,</span><span class="mi">8</span><span class="p">),(</span><span class="sc">'k'</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="sc">'l'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="p">,(</span><span class="sc">'m'</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="sc">'n'</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">'o'</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">'p'</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+                        <span class="p">,(</span><span class="sc">'q'</span><span class="p">,</span><span class="mi">10</span><span class="p">),(</span><span class="sc">'r'</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">'s'</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">'t'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="p">,(</span><span class="sc">'u'</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">'v'</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="sc">'w'</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="sc">'y'</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+                        <span class="p">,(</span><span class="sc">'x'</span><span class="p">,</span><span class="mi">8</span><span class="p">),(</span><span class="sc">'z'</span><span class="p">,</span><span class="mi">10</span><span class="p">)]</span>
+
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">dict</span> <span class="o">&lt;-</span> <span class="n">readFile</span> <span class="s">"./dictionary.csv"</span>
+  <span class="n">putStrLn</span> <span class="s">"Input your scrabble letters:"</span>
+  <span class="n">tiles</span> <span class="o">&lt;-</span> <span class="n">getLine</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="n">show</span> 
+    <span class="o">.</span> <span class="n">sortBy</span> <span class="n">comparator</span>
+    <span class="o">.</span> <span class="n">scores</span>
+    <span class="o">.</span> <span class="n">possibilities</span> <span class="n">tiles</span> <span class="o">$</span> <span class="n">map</span> <span class="n">init</span> <span class="o">$</span> <span class="n">lines</span> <span class="n">dict</span>
+  <span class="kr">where</span> <span class="n">comparator</span> <span class="n">a</span> <span class="n">b</span> <span class="o">=</span> <span class="kr">if</span> <span class="n">snd</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">snd</span> <span class="n">b</span> <span class="kr">then</span> <span class="kt">LT</span> <span class="kr">else</span> <span class="kt">GT</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Let’s walk through the code line by line.</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="kr">import</span> <span class="nn">Data.List</span>
+<span class="kr">import</span> <span class="nn">Data.Maybe</span>
+<span class="kr">import</span> <span class="k">qualified</span> <span class="nn">Data.Map</span> <span class="k">as</span> <span class="n">M</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>These are pretty self explanatory. We need some of the functions that are specific to lists in <code class="highlighter-rouge">Data.List</code>, the <code class="highlighter-rouge">fromJust</code> function exposed by <code class="highlighter-rouge">Data.Maybe</code>, and <code class="highlighter-rouge">Data.Map</code> for a map - namespaced as <code class="highlighter-rouge">M</code> to avoid naming collisions<sup id="fnref:fn-namespaces"><a href="#fn:fn-namespaces" class="footnote">1</a></sup>.</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><pre><span class="n">possibilities</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span>
+<span class="n">possibilities</span> <span class="n">letters</span> <span class="o">=</span> <span class="n">filter</span> <span class="p">(</span><span class="n">possibleWord</span> <span class="n">letters</span><span class="p">)</span>
+
+<span class="n">possibleWord</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="n">possibleWord</span> <span class="n">xs</span> <span class="kt">[]</span> <span class="o">=</span> <span class="kt">True</span>
+<span class="n">possibleWord</span> <span class="n">xs</span> <span class="p">(</span><span class="n">y</span><span class="o">:</span><span class="n">ys</span><span class="p">)</span> <span class="o">=</span> <span class="kr">if</span> <span class="n">y</span> <span class="p">`</span><span class="n">elem</span><span class="p">`</span> <span class="n">xs</span>
+  <span class="kr">then</span> <span class="n">possibleWord</span> <span class="p">(</span><span class="n">delete</span> <span class="n">y</span> <span class="n">xs</span><span class="p">)</span> <span class="n">ys</span>
+  <span class="kr">else</span> <span class="kt">False</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Here is the meat of the code, we create the functions that will give us a list of all possible words. First, we’ll look at <code class="highlighter-rouge">possibleWord</code>. This is the check that takes a valid Scrabble™ word, and a list of our letters (<code class="highlighter-rouge">xs</code>), then checks if the first letter is in the Scrabble™ word<sup id="fnref:fn-char_lists"><a href="#fn:fn-char_lists" class="footnote">2</a></sup>. If it is, it removes that letter from the scrabble word and repeats the process using our remaining letters that haven’t been used, and the new word (less the character we just removed). Stepwise, it looks like this:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td><td class="code"><pre><span class="n">possibleWord</span> <span class="s">"aresyin"</span> <span class="s">"rainy"</span>
+<span class="c1">-- checks if 'r' is in "aresyin", and succeeds</span>
+<span class="n">possibleWord</span> <span class="s">"aesyin"</span> <span class="s">"ainy"</span>
+<span class="c1">-- checks if 'a' is in "aesyin", and succeeds,</span>
+<span class="c1">-- continuing this pattern until the end where</span>
+<span class="n">possibleWord</span> <span class="s">"es"</span> <span class="s">""</span>
+<span class="c1">-- This case will match the first pattern of</span>
+<span class="c1">-- possibleWord xs [] = True</span>
+<span class="c1">-- and will return True</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>This function is then applied to the list of possible Scrabble™ words in <code class="highlighter-rouge">possibilities</code>, using <code class="highlighter-rouge">filter</code>. This works the same as <code class="highlighter-rouge">Array.prototype.filter</code> in Javascript, and I’m sure most otherlanguates behave in a similar way. What makes this code nicer (in my opinion) is the use of pattern matching and not having to write for loops and explicitly declare temporary variables.</p>
+
+<p>Next, we add the scores:</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</pre></td><td class="code"><pre><span class="n">scores</span> <span class="o">::</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">score</span> <span class="n">x</span><span class="p">))</span>
+
+<span class="n">score</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">foldr</span> <span class="p">(</span><span class="nf">\</span><span class="n">tile</span> <span class="n">acc</span> <span class="o">-&gt;</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">tileScore</span> <span class="n">tile</span><span class="p">)</span> <span class="mi">0</span>
+  <span class="kr">where</span> <span class="n">tileScore</span> <span class="n">t</span> <span class="o">=</span> <span class="n">fromJust</span> <span class="o">$</span> <span class="kt">M</span><span class="o">.</span><span class="n">lookup</span> <span class="n">t</span> <span class="n">tiles</span>
+
+
+<span class="n">tiles</span> <span class="o">=</span> <span class="kt">M</span><span class="o">.</span><span class="n">fromList</span> <span class="p">[(</span><span class="sc">'a'</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">'b'</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="sc">'c'</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="sc">'d'</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+                        <span class="p">,(</span><span class="sc">'e'</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">'f'</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="sc">'g'</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="sc">'h'</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+                        <span class="p">,(</span><span class="sc">'i'</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">'j'</span><span class="p">,</span><span class="mi">8</span><span class="p">),(</span><span class="sc">'k'</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="sc">'l'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="p">,(</span><span class="sc">'m'</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="sc">'n'</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">'o'</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">'p'</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+                        <span class="p">,(</span><span class="sc">'q'</span><span class="p">,</span><span class="mi">10</span><span class="p">),(</span><span class="sc">'r'</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">'s'</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">'t'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="p">,(</span><span class="sc">'u'</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">'v'</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="sc">'w'</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="sc">'y'</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+                        <span class="p">,(</span><span class="sc">'x'</span><span class="p">,</span><span class="mi">8</span><span class="p">),(</span><span class="sc">'z'</span><span class="p">,</span><span class="mi">10</span><span class="p">)]</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We calculate <code class="highlighter-rouge">score</code> for a word by folding over a word with a lambda expression that will sum the tile values, and apply <code class="highlighter-rouge">score</code> using <code class="highlighter-rouge">map</code> to all the possible words we’ve found above. On line 6, <code class="highlighter-rouge">fromJust</code> is the function we need to use from <code class="highlighter-rouge">Data.Maybe</code> and all it does is extract the value from the <code class="highlighter-rouge">Maybe Int</code> type returned by <code class="highlighter-rouge">M.lookup t tiles</code>, throwing an error if the specified tile can’t be found. When all is said and done, <code class="highlighter-rouge">scores</code> will be used to create a list of tuples, containing a word and its score.</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td><td class="code"><pre><span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">dict</span> <span class="o">&lt;-</span> <span class="n">readFile</span> <span class="s">"./dictionary.csv"</span>
+  <span class="n">putStrLn</span> <span class="s">"Input your scrabble letters:"</span>
+  <span class="n">tiles</span> <span class="o">&lt;-</span> <span class="n">getLine</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="n">show</span> 
+    <span class="o">.</span> <span class="n">sortBy</span> <span class="n">comparator</span>
+    <span class="o">.</span> <span class="n">scores</span>
+    <span class="o">.</span> <span class="n">possibilities</span> <span class="n">tiles</span> <span class="o">$</span> <span class="n">map</span> <span class="n">init</span> <span class="o">$</span> <span class="n">lines</span> <span class="n">dict</span>
+  <span class="kr">where</span> <span class="n">comparator</span> <span class="n">a</span> <span class="n">b</span> <span class="o">=</span> <span class="kr">if</span> <span class="n">snd</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">snd</span> <span class="n">b</span> <span class="kr">then</span> <span class="kt">LT</span> <span class="kr">else</span> <span class="kt">GT</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Finally, we compose all of our functions together in the <code class="highlighter-rouge">main</code> function and output what we need. I haven’t gone to great lengths to make the output very pretty, but it gets the job done. We first read the file of possible words into a string (it contains a word on every line and nothing else), read in our tiles, then wire our functions together. It helps sometimes to read a long composition in reverse</p>
+
+<ul>
+  <li>take the string of possible words, and split it into lines</li>
+  <li>get everything except the last element of each line (we need to ignore the <code class="highlighter-rouge">\\n</code>)</li>
+  <li>apply the possibilities filter to our list of possible words</li>
+  <li>calculate the scores for our list of valid words</li>
+  <li>sort by scores (the scond value of the tuple)</li>
+  <li>output the results</li>
+  <li>…</li>
+  <li>profit!</li>
+</ul>
+
+<p>This likely isn’t the most efficient way to get the task done, but it was a great way to get a grasp on Haskells most commonly used features: pattern matching, composition (<code class="highlighter-rouge">.</code>), and <code class="highlighter-rouge">map</code> and <code class="highlighter-rouge">foldr</code>. I wouldn’t suggest using this in your next game of Scrabble™ though. It <em>will</em> run more than fast enough to work in your turn, but nobody likes a cheater.</p>
+
+<p>Code can be found <a href="https://github.com/mdtusz/scrabble-cheat">here</a>.</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:fn-namespaces">
+      <p>Haskell has a set of default functions loaded as <code class="highlighter-rouge">Prelude</code>, some of which have names that will conflict with packages loaded in. We can avoid this by making an imported module <code class="highlighter-rouge">qualified</code>, or specifying which functions to include or exclude using syntax like <code class="highlighter-rouge">import Data.List (nub, sort)</code> to include <code class="highlighter-rouge">nub</code> and <code class="highlighter-rouge">sort</code>, or <code class="highlighter-rouge">import Data.List hiding (nub, sort)</code> to load everything <em>except</em> <code class="highlighter-rouge">nub</code> and <code class="highlighter-rouge">sort</code>.&nbsp;<a href="#fnref:fn-namespaces" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:fn-char_lists">
+      <p>Conveniently, <code class="highlighter-rouge">Strings</code> and <code class="highlighter-rouge">[Char]</code>’s are treated the same in Haskell.&nbsp;<a href="#fnref:fn-char_lists" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+</article>
+    </main>
+    <footer>
+  <!-- &copy; 2017. Very few rights reserved. -->
+</footer>
+    <script src="/public/js/main.js"></script>
+<script src="/public/js/console.js"></script>
+  </body>
+</html>
