@@ -9,6 +9,17 @@ title: about
 
 ---
 
-I graduated with a degree in economics from Concordia University, but in my last year, I decided that I *much* prefered programming and development, so I added in a minor in computer science. Since graduating, I've decided that sofware is much more in line with my interests and have spent all my time furthering my learning, while developing the back end for a Montreal company called Kreate Solutions.
+I graduated with a degree in economics from Concordia University, but in my last
+year, I decided that I *much* prefered programming and software development, so 
+I added in a minor in computer science. Since graduating, I've decided that 
+sofware is much more in line with my interests and have dedicated myself to the 
+career, working at various companies as a web developer. Most recently, I have 
+been working in Montreal for AON3D, creating a host that communicates with the 
+firmware controlling the machine at a low level.
 
-Recently, I've become wildly interested in highly modular software arhitecture, the increasing availability of useful open data, and "the internet of things". With the increasing availability of low cost microcontrollers and improvements to internet infrastructure all over the world, I am extremely excited to see and be a part of the future that is developing around us.
+When I'm not at work, I like to tinker and take things apart to see how they
+work, and occasionally will play around with musical coding using tools like
+[lissajous js](http://lissajousjs.com/) and occasionally start from scratch
+using the web audio api. I also like to climb, but unfortunately, it's winter
+right now and I don't get the opportunity to go very often.
+
