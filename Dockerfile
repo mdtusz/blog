@@ -1,3 +1,4 @@
-FROM nginx
-COPY _site /usr/share/nginx/html
-EXPOSE 80
+FROM jekyll/jekyll:latest
+COPY . /srv/jekyll
+EXPOSE 4000
+CMD ["jekyll", "serve"]
