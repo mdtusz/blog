@@ -112,5 +112,12 @@ article {
         color: #fff;
 
         @include transition(color 0.2s ease);
+  }
+
+  .footnotes {
+    color: #888;
+
+    ol {
+      padding: 1em;
     }
 }
