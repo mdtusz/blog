@@ -1,117 +1,127 @@
 // Article elements
 article {
-    padding-bottom: 5px;
-    margin-top: 20px;
-    border-bottom: 1px solid #efefef;
-    font-family: 'merriweather';
+  padding-bottom: 5px;
+  margin-top: 20px;
+  border-bottom: 1px solid #efefef;
+  font-family: "merriweather";
 
-    &:last-of-type {
-        border-bottom: none;
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "lato";
+    margin-top: 26px;
+
+    > a {
+      color: inherit;
+    }
+  }
+
+  h1 {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  h4 {
+    font-size: 15px;
+  }
+
+  time {
+    float: right;
+    font-size: 10px;
+    color: #aaa;
+  }
+
+  p,
+  ul,
+  ol,
+  dd,
+  dt {
+    font-size: 12px;
+    margin-bottom: 2em;
+  }
+
+  a {
+    color: #0a8;
+
+    &:hover,
+    &:active {
+      @include transition(color 0.2s ease);
+
+      color: darken(#0a8, 5%);
+    }
+  }
+
+  blockquote {
+    border-left: 1px solid #0a8;
+    padding-left: 10px;
+  }
+
+  > table {
+    width: 100%;
+    border: 1px solid #dddddd;
+    border-collapse: collapse;
+    font-family: "lato";
+    margin: 30px 0;
+
+    thead {
+      border-bottom: 1px solid #dddddd;
+      text-align: left;
     }
 
-    h1, h2, h3, h4 {
-        font-family: 'lato';
-        margin-top: 26px;
-
-        > a {
-            color: inherit;
-        }
+    td,
+    th {
+      border: none;
+      padding: 6px;
     }
 
-    h1 {
-        font-size: 30px;
-        line-height: 36px;
+    tbody,
+    tfoot {
+      font-size: 12px;
     }
 
-    h2 {
-        font-size: 22px;
+    tbody tr {
+      &:nth-of-type(odd) {
+        background-color: #f7f7f7;
+      }
     }
 
-    h3 {
-        font-size: 16px;
+    tfoot {
+      border-top: 2px;
     }
+  }
 
-    h4 {
-        font-size: 15px;
-    }
+  hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
 
-    time {
-        float: right;
-        font-size: 10px;
-        color: #aaa;
-    }
+  img {
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+  }
 
-    p, ul, ol, dd, dt {
-        font-size: 12px;
-        margin-bottom: 2em;
-    }
+  .read-time {
+    font-family: "merriweather";
+    font-size: 10px;
+    color: #fff;
 
-    a {
-        color: #0a8;
-
-        &:hover, &:active {
-            @include transition(color 0.2s ease);
-
-            color: darken(#0a8, 5%);
-        }
-    }
-
-    blockquote {
-        border-left: 1px solid #0a8;
-        padding-left: 10px;
-    }
-
-    > table {
-        width: 100%;
-        border: 1px solid #DDDDDD;
-        border-collapse: collapse;
-        font-family: 'lato';
-        margin: 30px 0;
-
-        thead {
-            border-bottom: 1px solid #DDDDDD;
-            text-align: left;
-        }
-
-        td, th {
-            border: none;
-            padding: 6px;
-        }
-
-        tbody, tfoot {
-            font-size: 12px;
-        }
-
-        tbody tr {
-            &:nth-of-type(odd) {
-                background-color: #F7F7F7;
-            }
-        }
-
-        tfoot {
-            border-top: 2px;
-        }
-    }
-
-    hr {
-        border: 0;
-        height: 0;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    img {
-        max-width: 100%;
-        margin: 0 auto;
-        display: block;
-    }
-
-    .read-time {
-        font-family: 'merriweather';
-        font-size: 10px;
-        color: #fff;
-
-        @include transition(color 0.2s ease);
+    @include transition(color 0.2s ease);
   }
 
   .footnotes {
@@ -120,4 +130,5 @@ article {
     ol {
       padding: 1em;
     }
+  }
 }

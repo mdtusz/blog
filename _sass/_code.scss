@@ -1,11 +1,14 @@
 // Code
-code, pre, .gist, .gist-file {
+code,
+pre,
+.gist,
+.gist-file {
   font-family: Menlo, Monaco, "Courier New", monospace !important;
   font-size: 12px;
 }
 
 code {
-  padding: .1em .3em;
+  padding: 0.1em 0.3em;
   // font-size: 90%;
   color: #d44950;
   background-color: #f9f9f9;
@@ -44,11 +47,10 @@ pre code {
     color: #ddd;
     // Make sure numbers aren't selectable
     -webkit-user-select: none;
-       -moz-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    user-select: none;
   }
 }
-
 
 // Gist via GitHub Pages
 .gist .markdown-body {

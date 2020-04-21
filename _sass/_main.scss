@@ -1,11 +1,11 @@
-main{
+main {
   display: inline-block;
   width: 80%;
   float: right;
   padding: 15px;
   line-height: 1.2em;
 
-  #home-image{
+  #home-image {
     width: 100%;
     height: 40vh;
     margin: 0 auto;
@@ -16,34 +16,35 @@ main{
     background-position: center center;
   }
 
-  .readmore{
+  .readmore {
     display: block;
     margin-top: 20px;
     color: #0a8;
-    font-family: 'lato';
+    font-family: "lato";
     font-size: 18px;
   }
 
-  .readmore:hover + .read-time{
+  .readmore:hover + .read-time {
     color: #ddd;
   }
-  .pagination{
+  .pagination {
     margin: 40px 0 20px;
-    .older, .newer{
+    .older,
+    .newer {
       border-bottom: 1px solid #eeeeee;
       color: #aaaaaa;
       @include transition(border-bottom 0.2s ease, color 0.2s ease);
-      &:hover{
+      &:hover {
         color: inherit;
         border-bottom: 1px solid #aaaaaa;
       }
     }
-    .newer{
+    .newer {
       float: right;
     }
   }
 
-  @media only screen and (max-width: 570px){
+  @media only screen and (max-width: 570px) {
     width: 100%;
     margin-top: 86px;
   }

@@ -1,85 +1,101 @@
 // Merriweather
 @font-face {
-    font-family: 'merriweather';
-    src: url('/public/fonts/merriweather-bold-webfont.eot');
-    src: url('/public/fonts/merriweather-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/public/fonts/merriweather-bold-webfont.woff') format('woff'),
-         url('/public/fonts/merriweather-bold-webfont.ttf') format('truetype'),
-         url('/public/fonts/merriweather-bold-webfont.svg#colaborate-boldregular') format('svg');
-    font-style: normal;
-    font-weight: bold
+  font-family: "merriweather";
+  src: url("/public/fonts/merriweather-bold-webfont.eot");
+  src: url("/public/fonts/merriweather-bold-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/public/fonts/merriweather-bold-webfont.woff") format("woff"),
+    url("/public/fonts/merriweather-bold-webfont.ttf") format("truetype"),
+    url("/public/fonts/merriweather-bold-webfont.svg#colaborate-boldregular")
+      format("svg");
+  font-style: normal;
+  font-weight: bold;
 }
 
 @font-face {
-    font-family: 'merriweather';
-    src: url('/public/fonts/merriweather-regular-webfont.eot');
-    src: url('/public/fonts/merriweather-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/public/fonts/merriweather-regular-webfont.woff') format('woff'),
-         url('/public/fonts/merriweather-regular-webfont.ttf') format('truetype'),
-         url('/public/fonts/merriweather-regular-webfont.svg#colaboratelightregular') format('svg');
-    font-style: normal;
+  font-family: "merriweather";
+  src: url("/public/fonts/merriweather-regular-webfont.eot");
+  src: url("/public/fonts/merriweather-regular-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/public/fonts/merriweather-regular-webfont.woff") format("woff"),
+    url("/public/fonts/merriweather-regular-webfont.ttf") format("truetype"),
+    url("/public/fonts/merriweather-regular-webfont.svg#colaboratelightregular")
+      format("svg");
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'merriweather';
-    src: url('/public/fonts/merriweather-bolditalic-webfont.eot');
-    src: url('/public/fonts/merriweather-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/public/fonts/merriweather-bolditalic-webfont.woff') format('woff'),
-         url('/public/fonts/merriweather-bolditalic-webfont.ttf') format('truetype'),
-         url('/public/fonts/merriweather-bolditalic-webfont.svg#colaborate-mediumregular') format('svg');
-    font-style: italic;
-    font-weight: bold
+  font-family: "merriweather";
+  src: url("/public/fonts/merriweather-bolditalic-webfont.eot");
+  src: url("/public/fonts/merriweather-bolditalic-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/public/fonts/merriweather-bolditalic-webfont.woff") format("woff"),
+    url("/public/fonts/merriweather-bolditalic-webfont.ttf") format("truetype"),
+    url("/public/fonts/merriweather-bolditalic-webfont.svg#colaborate-mediumregular")
+      format("svg");
+  font-style: italic;
+  font-weight: bold;
 }
 
 @font-face {
-    font-family: 'merriweather';
-    src: url('/public/fonts/merriweather-italic-webfont.eot');
-    src: url('/public/fonts/merriweather-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/public/fonts/merriweather-italic-webfont.woff') format('woff'),
-         url('/public/fonts/merriweather-italic-webfont.ttf') format('truetype'),
-         url('/public/fonts/merriweather-italic-webfont.svg#colaborate-regularregular') format('svg');
-    font-style: italic;
+  font-family: "merriweather";
+  src: url("/public/fonts/merriweather-italic-webfont.eot");
+  src: url("/public/fonts/merriweather-italic-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/public/fonts/merriweather-italic-webfont.woff") format("woff"),
+    url("/public/fonts/merriweather-italic-webfont.ttf") format("truetype"),
+    url("/public/fonts/merriweather-italic-webfont.svg#colaborate-regularregular")
+      format("svg");
+  font-style: italic;
 }
 
 // Lato
 @font-face {
-    font-family: 'lato';
-    src: url('/public/fonts/lato-bold-webfont.eot');
-    src: url('/public/fonts/lato-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/public/fonts/lato-bold-webfont.woff') format('woff'),
-         url('/public/fonts/lato-bold-webfont.ttf') format('truetype'),
-         url('/public/fonts/lato-bold-webfont.svg#colaborate-boldregular') format('svg');
-    font-style: normal;
-    font-weight: bold
+  font-family: "lato";
+  src: url("/public/fonts/lato-bold-webfont.eot");
+  src: url("/public/fonts/lato-bold-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/public/fonts/lato-bold-webfont.woff") format("woff"),
+    url("/public/fonts/lato-bold-webfont.ttf") format("truetype"),
+    url("/public/fonts/lato-bold-webfont.svg#colaborate-boldregular")
+      format("svg");
+  font-style: normal;
+  font-weight: bold;
 }
 
 @font-face {
-    font-family: 'lato';
-    src: url('/public/fonts/lato-regular-webfont.eot');
-    src: url('/public/fonts/lato-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/public/fonts/lato-regular-webfont.woff') format('woff'),
-         url('/public/fonts/lato-regular-webfont.ttf') format('truetype'),
-         url('/public/fonts/lato-regular-webfont.svg#colaboratelightregular') format('svg');
-    font-style: normal;
+  font-family: "lato";
+  src: url("/public/fonts/lato-regular-webfont.eot");
+  src: url("/public/fonts/lato-regular-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/public/fonts/lato-regular-webfont.woff") format("woff"),
+    url("/public/fonts/lato-regular-webfont.ttf") format("truetype"),
+    url("/public/fonts/lato-regular-webfont.svg#colaboratelightregular")
+      format("svg");
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'lato';
-    src: url('/public/fonts/lato-bolditalic-webfont.eot');
-    src: url('/public/fonts/lato-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/public/fonts/lato-bolditalic-webfont.woff') format('woff'),
-         url('/public/fonts/lato-bolditalic-webfont.ttf') format('truetype'),
-         url('/public/fonts/lato-bolditalic-webfont.svg#colaborate-mediumregular') format('svg');
-    font-style: italic;
-    font-weight: bold
+  font-family: "lato";
+  src: url("/public/fonts/lato-bolditalic-webfont.eot");
+  src: url("/public/fonts/lato-bolditalic-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/public/fonts/lato-bolditalic-webfont.woff") format("woff"),
+    url("/public/fonts/lato-bolditalic-webfont.ttf") format("truetype"),
+    url("/public/fonts/lato-bolditalic-webfont.svg#colaborate-mediumregular")
+      format("svg");
+  font-style: italic;
+  font-weight: bold;
 }
 
 @font-face {
-    font-family: 'lato';
-    src: url('/public/fonts/lato-italic-webfont.eot');
-    src: url('/public/fonts/lato-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/public/fonts/lato-italic-webfont.woff') format('woff'),
-         url('/public/fonts/lato-italic-webfont.ttf') format('truetype'),
-         url('/public/fonts/lato-italic-webfont.svg#colaborate-regularregular') format('svg');
-    font-style: italic;
+  font-family: "lato";
+  src: url("/public/fonts/lato-italic-webfont.eot");
+  src: url("/public/fonts/lato-italic-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/public/fonts/lato-italic-webfont.woff") format("woff"),
+    url("/public/fonts/lato-italic-webfont.ttf") format("truetype"),
+    url("/public/fonts/lato-italic-webfont.svg#colaborate-regularregular")
+      format("svg");
+  font-style: italic;
 }
