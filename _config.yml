@@ -20,11 +20,8 @@ sass:
 # About/contact
 author:
   name: Miklós Tusz
-  twitter: https://twitter.com/mdtusz
   github: https://github.com/mdtusz
   keybase: https://keybase.io/mdtusz
-  stackexchange: http://stackexchange.com/users/4119555/mikl%C3%B3s-tusz
-  instagram: https://instagram.com/mdtusz
   email: mdtusz@gmail.com
 
 # Custom vars
