@@ -4,14 +4,14 @@ pre,
 .gist,
 .gist-file {
   font-family: Menlo, Monaco, "Courier New", monospace !important;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 code {
   padding: 0.1em 0.3em;
-  // font-size: 90%;
   color: #d44950;
-  background-color: #f9f9f9;
+  font-weight: 600;
+  background-color: #eff2f4;
   border-radius: 4px;
 }
 
@@ -30,9 +30,9 @@ pre code {
 // Pygments via Jekyll
 .highlight {
   padding: 1em;
-  margin: 3em 0;
+  margin: 0;
   line-height: 1.4;
-  background-color: #f9f9f9;
+  background-color: #eff2f4;
   border-radius: 4px;
 
   pre {
@@ -44,12 +44,16 @@ pre code {
     display: inline-block; // Ensures the null space also isn't selectable
     padding-right: 6px;
     padding-left: 6px;
-    color: #ddd;
+    color: #888;
     // Make sure numbers aren't selectable
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
   }
+}
+
+td.code {
+  display: block;
 }
 
 // Gist via GitHub Pages
