@@ -13,7 +13,7 @@ I graduated with a degree in economics from Concordia University, but in my last
 Since graduating, I've worked as a software developer and continued to dive deeper into programming languages, paradigms, theory, computers, and software as a whole.
 
 From February of 2017 to July of 2020, I worked at an industrial 3D printing manufacturer, [AON3D](https://www.aon3d.com), where I was the first software hire.
-Here, I created the software that provides the core system running on the machines, managing the user interface, over-the-air updates, firmware updates, file management, web server etc.
+Here, I created the core system running on the machines that powers the user interface, manages over-the-air system and firmware updates, print-file management, web server etc.
 Until a dedicated firmware developer was hired, I was also tasked with modifying the firmware codebase (a fork of the popular open-source firmware, [Marlin](https://github.com/MarlinFirmware/Marlin)) to develop features tailored to AON3D machines - automatic bed levelling, chamber heating, and an asynchronous communication protocol to replace the blocking synchronous protocol used by most 3D printers.
 
 Before AON3D, I worked at [Plotly](https://plot.ly) where I was one of the core maintainers of the [plotly.js](https://github.com/plotly/plotly.js) javascript charting library, and implemented support for Jupyter Notebook hosting in the Plotly Studio SAAS product.
